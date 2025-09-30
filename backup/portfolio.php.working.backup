@@ -1,0 +1,91 @@
+<section id="portfolio" class="page-section min-h-screen flex items-center py-20">
+    <div class="section-content container mx-auto px-6 w-full">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl md:text-7xl font-bold mb-4 text-glow">Portfolio</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Bekijk enkele van onze recente projecten</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 portfolio-grid">
+            <?php
+            // Scan the assets/images/portfolio directory for image files
+            $imageDir = 'assets/images/portfolio/';
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
+            $images = [];
+            
+            if (is_dir($imageDir)) {
+                $files = scandir($imageDir);
+                foreach ($files as $file) {
+                    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                    if (in_array($extension, $allowedExtensions)) {
+                        $images[] = $file;
+                    }
+                }
+            }
+            
+            // If we have images, display them (limit to 6 for the grid)
+            $displayCount = min(6, count($images));
+            $categories = ['Deukherstel', 'Krasverwijdering', 'Lakherstel', 'Polijsten', 'Deurherstel', 'Bumperherstel'];
+            $titles = ['Audi A4', 'BMW X5', 'Mercedes C-Klasse', 'Volkswagen Golf', 'Tesla Model 3', 'Porsche 911', 'Audi Q7', 'BMW Serie 3', 'Mercedes E-Klasse'];
+            
+            for ($i = 0; $i < $displayCount; $i++) {
+                $randomImage = $images[array_rand($images)];
+                $randomCategory = $categories[array_rand($categories)];
+                $randomTitle = $titles[array_rand($titles)];
+                
+                echo '<div class="portfolio-item bg-black/40 backdrop-blur-sm rounded-lg overflow-hidden border border-gray-700 transform transition-all duration-300 hover:scale-105">';
+                echo '    <div class="h-64 overflow-hidden">';
+                echo '        <img src="' . $imageDir . $randomImage . '" alt="' . $randomTitle . '" class="w-full h-full object-cover">';
+                echo '    </div>';
+                echo '    <div class="p-6">';
+                echo '        <div class="text-blue-400 text-sm mb-2">' . $randomCategory . '</div>';
+                echo '        <h3 class="text-xl font-bold">' . $randomTitle . '</h3>';
+                echo '    </div>';
+                echo '</div>';
+            }
+            
+            // If no images found, display a message
+            if (count($images) == 0) {
+                echo '<div class="col-span-3 text-center text-gray-400 py-12">';
+                echo '    <p>Geen portfolio-afbeeldingen gevonden in de map: ' . $imageDir . '</p>';
+                echo '    <p class="mt-2 text-sm">Voeg afbeeldingen toe aan deze map om ze hier weer te geven.</p>';
+                echo '</div>';
+            }
+            ?>
+        </div>
+
+        <div class="text-center mt-12">
+            <button class="border-2 border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                Bekijk Meer Werk
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+// Portfolio GSAP animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Add random positioning effect to portfolio items
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    portfolioItems.forEach((item, index) => {
+        // Set initial random position
+        gsap.set(item, {
+            x: (Math.random() - 0.5) * 100,
+            y: (Math.random() - 0.5) * 100,
+            opacity: 0,
+            rotation: (Math.random() - 0.5) * 20
+        });
+
+        // Animate items into place
+        gsap.to(item, {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            duration: 1,
+            delay: index * 0.2,
+            ease: "back.out(1.7)"
+        });
+    });
+});
+</script>

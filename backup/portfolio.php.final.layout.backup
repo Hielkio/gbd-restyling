@@ -1,0 +1,96 @@
+<section id="portfolio" class="page-section min-h-screen flex items-center py-20">
+    <div class="section-content container mx-auto px-6 w-full">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl md:text-7xl font-bold mb-4 text-glow">Portfolio</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Bekijk enkele van onze recente projecten</p>
+        </div>
+
+        <div class="grid grid-cols-3 grid-rows-2 gap-4 h-screen p-4">
+            <?php
+            // Scan the assets/images/portfolio directory for image files
+            $imageDir = 'assets/images/portfolio/';
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
+            $images = [];
+
+            if (is_dir($imageDir)) {
+                $files = scandir($imageDir);
+                foreach ($files as $file) {
+                    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                    if (in_array($extension, $allowedExtensions)) {
+                        $images[] = $file;
+                    }
+                }
+            }
+
+            // Ensure we have unique images and shuffle them
+            $uniqueImages = array_unique($images);
+            shuffle($uniqueImages);
+
+            // Categories and titles for portfolio items
+            $categories = ['Deukherstel', 'Krasverwijdering', 'Lakherstel', 'Polijsten', 'Deurherstel', 'Bumperherstel'];
+            $titles = ['Audi A4', 'BMW X5', 'Mercedes C-Klasse', 'Volkswagen Golf', 'Tesla Model 3', 'Porsche 911', 'Audi Q7', 'BMW Serie 3', 'Mercedes E-Klasse'];
+
+            // Display the grid items only if we have enough images
+            if (count($uniqueImages) >= 5) {
+                // Main large image (spans 2 rows)
+                $mainImage = $uniqueImages[0];
+                echo "<div class="col-span-1 row-span-2 bg-gray-200 border-2 border-black overflow-hidden">";
+                echo "    <img src="" . $imageDir . $mainImage . "" alt="Grote demo afbeelding" class="w-full h-full object-cover">";
+                echo "</div>";
+
+                // Four smaller images
+                for ($i = 1; $i <= 4; $i++) {
+                    $image = $uniqueImages[$i];
+                    $randomCategory = $categories[array_rand($categories)];
+                    $randomTitle = $titles[array_rand($titles)];
+
+                    echo "<div class="col-span-1 row-span-1 bg-gray-200 border-2 border-black overflow-hidden">";
+                    echo "    <img src="" . $imageDir . $image . "" alt="" . $randomTitle . "" class="w-full h-full object-cover">";
+                    echo "</div>";
+                }
+            } else {
+                // If not enough images, display a message
+                echo "<div class="col-span-3 text-center text-gray-400 py-12">";
+                echo "    <p>Minimaal 5 portfolio-afbeeldingen vereist voor deze layout.</p>";
+                echo "    <p class="mt-2 text-sm">Voeg meer afbeeldingen toe aan de map: " . $imageDir . "</p>";
+                echo "</div>";
+            }
+            ?>
+        </div>
+
+        <div class="text-center mt-12">
+            <button class="border-2 border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                Bekijk Meer Werk
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+// Portfolio GSAP animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Add random positioning effect to portfolio items
+    const portfolioItems = document.querySelectorAll('.grid > div');
+
+    portfolioItems.forEach((item, index) => {
+        // Set initial random position
+        gsap.set(item, {
+            x: (Math.random() - 0.5) * 100,
+            y: (Math.random() - 0.5) * 100,
+            opacity: 0,
+            rotation: (Math.random() - 0.5) * 20
+        });
+
+        // Animate items into place
+        gsap.to(item, {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            duration: 1,
+            delay: index * 0.2,
+            ease: "back.out(1.7)"
+        });
+    });
+});
+</script>
