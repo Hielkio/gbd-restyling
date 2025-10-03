@@ -109,6 +109,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				}
 			});
 		}
+	
+		// Phone modal
+		const phoneLink = document.getElementById('phone-link');
+		const phoneModal = document.getElementById('phone-modal');
+		const closeModal = document.getElementById('close-modal');
+	
+		if (phoneLink && phoneModal && closeModal) {
+			phoneLink.addEventListener('click', function(e) {
+				e.preventDefault();
+				phoneModal.classList.remove('hidden');
+				gsap.fromTo(phoneModal, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+			});
+	
+			closeModal.addEventListener('click', function() {
+				gsap.to(phoneModal, { opacity: 0, duration: 0.3, onComplete: () => {
+					phoneModal.classList.add('hidden');
+				}});
+			});
+	
+			// Close modal when clicking outside
+			phoneModal.addEventListener('click', function(e) {
+				if (e.target === phoneModal) {
+					gsap.to(phoneModal, { opacity: 0, duration: 0.3, onComplete: () => {
+						phoneModal.classList.add('hidden');
+					}});
+				}
+			});
+		}
 	});
 
  // Achtergrondelementen uit de DOM verplaatsen en de JavaScript aanpassen

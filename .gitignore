@@ -1,0 +1,58 @@
+# Uitsluiten van onnodige bestanden en mappen
+
+# Development en test bestanden
+*.py
+*.html
+grid.html
+test-images.html
+index copy*
+index-fixed-bg.html
+
+# Ongebruikte mappen
+backup/
+grids/
+image-scraper/
+images/
+jsfiddlegrid/
+masonry-demo/
+masonry-gsap/
+ocean-life/
+ocean-life-video/
+test_downloads/
+test_downloads2/
+voidGrid/
+voidGrid-v1*/
+
+# Ongebruikte secties
+sections/contact.php
+sections/*copy*
+
+# Ongebruikte afbeeldingen
+assets/images/hq/4.jpg
+assets/images/hq/9.jpg
+assets/images/hq/10.jpeg
+assets/images/hq/12.jpg
+assets/images/hq/14.jpg
+assets/images/hq/15.jpg
+assets/images/portfolio/
+
+# Uitzonderingen voor benodigde afbeeldingen
+!assets/images/WhatsApp.svg
+!images/
+!images/logo-clean.jpg
+!images/restyling.jpg
+!images/logo.jpg
+!images/hq/
+!images/hq/1.jpg
+!images/hq/13.jpg
+!images/hq/3.jpg
+!images/hq/5.jpg
+!assets/images/team-demo.png
+
+# Ongebruikte JavaScript
+assets/js/metalicss.js
+
+# IDE en system bestanden
+.DS_Store
+Thumbs.db
+*.log

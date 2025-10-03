@@ -11,44 +11,43 @@
     <script src="assets/js/gsap.js?v=4" defer></script>
 </head>
 <body class="bg-gray-900 text-white text-xl overflow-x-hidden">
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-sm border-b border-gray-700">
-        <div class="container mx-auto px-6 py-6 h-16 overflow-visible relative flex relative items-center justify-between">
-            <!-- <div class="flex h-32 w-64 items-center space-x-4 relative"> -->
-                <div class="absolute left-0 t-0 py-1 px-2 h-full bg-[#1B191A]">
-                    <div class="relative flex bg-[#1B191A] items-center h-full">
-                        <img id="logo-cleanz" src="images/logo-clean.jpg" class="#temp-hidden h-full">
-                        <img src="images/restyling.jpg" class="h-1/3">
-                        <!-- <img src="images/uitdeukenzonderspuiten.jpg" class="h-3/8"> -->
-                        <!-- <img src="images/restyling-uitdeukenzonderspuiten.jpg" class="h-2/3"> -->
-                        <img id="logo-full" src="images/logo.jpg" class="!hidden absolute border-4 border-gray-500 border-t-0 object-contain bg-[#1B191A] py-0 px-4 top-0 left-0 h-48 w-72 z-30" height="200" width="400" alt="Logo GBD Restyling" />
-                    </div>
-                </div>
-            <!-- </div> -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#1B191A] backdrop-blur-sm border-b border-gray-700">
+        <div class="lg:container mx-auto px-6 py-3 min-h-16 overflow-visible flex items-center justify-between">
+            <div class="flex items-center space-x-2 py-1 px-2">
+                <img id="logo-cleanz" src="images/logo-clean.jpg" class="h-8 sm:h-12 #temp-hidden" alt="Logo Cleanz">
+                <img src="images/restyling.jpg" class="h-4 sm:h-6" alt="Restyling">
+                <img id="logo-full" src="images/logo.jpg" class="!hidden h-8 sm:h-12 w-20 sm:w-24 border-4 border-gray-500 border-t-0 object-contain" alt="Logo GBD Restyling" />
+            </div>
 
-            <nav class="text-xl ml-auto font-bold md:flex space-x-8">
-                <a href="#home" class="menu-item text-gray-300 hover:text-blue-400">Home</a>
-                <a href="#portfolio" class="menu-item text-gray-300 hover:text-blue-400">Impressie</a>
-                <a href="#diensten" class="menu-item text-gray-300 hover:text-blue-400">Diensten</a>
-                <a href="#voordelen" class="menu-item text-gray-300 hover:text-blue-400">Voordelen</a>
-                <a href="#over-ons" class="menu-item text-gray-300 hover:text-blue-400">Over Ons</a>
-                <a href="#contact" class="menu-item text-gray-300 hover:text-blue-400">Contact</a>
-            </nav>
+            <div class="flex items-center ml-auto space-x-8">
+                <nav id="desktopMenu" class="text-xl font-bold md:flex space-x-8">
+                    <a href="#home" class="menu-item text-gray-300 hover:text-blue-400">Home</a>
+                    <a href="#portfolio" class="menu-item text-gray-300 hover:text-blue-400">Impressie</a>
+                    <a href="#diensten" class="menu-item text-gray-300 hover:text-blue-400">Diensten</a>
+                    <a href="#voordelen" class="menu-item text-gray-300 hover:text-blue-400">Voordelen</a>
+                    <a href="#over-ons" class="menu-item text-gray-300 hover:text-blue-400">Over Ons</a>
+                    <a href="#contact" class="menu-item text-gray-300 hover:text-blue-400">Contact</a>
+                </nav>
 
-            <button class="md:hidden text-gray-300 hover:text-white" onclick="toggleMobileMenu()">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
+                <button id="hamburger-btn" class="lg:hidden text-white hover:text-gray-200 bg-blue-600 hover:bg-blue-700 p-2 sm:p-3 rounded shadow-lg" onclick="toggleMobileMenu()">
+                    <svg class="hamburger-icon w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="close-icon hidden w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
 
-        <nav id="mobileMenu" class="hidden md:hidden bg-black/90 backdrop-blur-sm border-t border-gray-700">
+        <nav id="mobileMenu" class="absolute top-full left-0 right-0 opacity-0 pointer-events-none lg:hidden bg-black/90 backdrop-blur-sm border-t border-gray-700 transition-opacity duration-300 ease-in-out z-50">
             <div class="px-6 py-4 space-y-3">
-                <a href="#home" class="block text-gray-300 hover:text-blue-400">Home</a>
-                <a href="#portfolio" class="block text-gray-300 hover:text-blue-400">Portfolio</a>
-                <a href="#diensten" class="block text-gray-300 hover:text-blue-400">Diensten</a>
-                <a href="#voordelen" class="block text-gray-300 hover:text-blue-400">Voordelen</a>
-                <a href="#over-ons" class="block text-gray-300 hover:text-blue-400">Over Ons</a>
-                <a href="#contact" class="block text-gray-300 hover:text-blue-400">Contact</a>
+                <a href="#home" class="block text-gray-300 hover:text-blue-400" onclick="toggleMobileMenu()">Home</a>
+                <a href="#portfolio" class="block text-gray-300 hover:text-blue-400" onclick="toggleMobileMenu()">Impressie</a>
+                <a href="#diensten" class="block text-gray-300 hover:text-blue-400" onclick="toggleMobileMenu()">Diensten</a>
+                <a href="#voordelen" class="block text-gray-300 hover:text-blue-400" onclick="toggleMobileMenu()">Voordelen</a>
+                <a href="#over-ons" class="block text-gray-300 hover:text-blue-400" onclick="toggleMobileMenu()">Over Ons</a>
+                <a href="#contact" class="block text-gray-300 hover:text-blue-400" onclick="toggleMobileMenu()">Contact</a>
             </div>
         </nav>
     </header>
@@ -59,7 +58,7 @@
     <div class="section-bg section-bg-contact"></div>
     <div class="section-overlay"></div>
     
-    <div class="pt-16">
+    <div class="pt-20">
         <?php // include "sections/home.php"; ?>
         <?php // include "sections/portfolio-new3.php"; ?>
         <?php // include "sections/diensten.php"; ?>
@@ -93,5 +92,35 @@
             </div>
         </div>
     </footer>
+    <div id="breakpoint-indicator" class="fixed bottom-4 right-4 bg-black text-white p-2 rounded z-50">Breakpoint: <span id="current-breakpoint">xs</span></div>
+
+    <script>
+        function getBreakpoint() {
+            const width = window.innerWidth;
+            if (width >= 1536) return '2xl';
+            if (width >= 1280) return 'xl';
+            if (width >= 1024) return 'lg';
+            if (width >= 768) return 'md';
+            if (width >= 640) return 'sm';
+            return 'xs';
+        }
+
+        function updateBreakpoint() {
+            document.getElementById('current-breakpoint').textContent = getBreakpoint();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger-icon');
+            const close = document.querySelector('.close-icon');
+            menu.classList.toggle('opacity-0');
+            menu.classList.toggle('pointer-events-none');
+            hamburger.classList.toggle('hidden');
+            close.classList.toggle('hidden');
+        }
+
+        window.addEventListener('load', updateBreakpoint);
+        window.addEventListener('resize', updateBreakpoint);
+    </script>
 </body>
 </html>
