@@ -23,6 +23,12 @@ test_downloads2/
 voidGrid/
 voidGrid-v1*/
 
+# Grote bestanden die GitHub limiet overschrijden
+*.mp4
+*.avi
+*.mov
+*.mkv
+
 # Ongebruikte secties
 sections/contact.php
 sections/*copy*
